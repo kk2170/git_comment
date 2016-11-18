@@ -1,6 +1,8 @@
 require 'pp'
 require 'grit'
 require 'natto'
+Grit::Git.git_timeout = 9600
+Grit::Git.git_max_size = 5242880000
 repo = Grit::Repo.new(ARGV[0])
 user_name = ARGV[1]
 
@@ -21,6 +23,7 @@ end
 
 words_and_count = Hash.new(0)
 words.each do |word|
+  next if word.size <= 1
   words_and_count[word] += 1
 end
 

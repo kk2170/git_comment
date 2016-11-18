@@ -15,4 +15,4 @@ words.each do |word|
   words_and_count[word] += 1
 end
 
-words_and_count.sort_by{|_, v| -v }
+pp words_and_count.sort_by{|_, v| -v }

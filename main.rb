@@ -4,7 +4,7 @@ require 'natto'
 Grit::Git.git_timeout = 9600
 Grit::Git.git_max_size = 5242880000
 repo = Grit::Repo.new(ARGV[0])
-user_name = ARGV[1]
+user_email = ARGV[1]
 
 words = []
 repo.log.each do |log|
@@ -12,8 +12,8 @@ repo.log.each do |log|
 
   next if log.message.include?('Merge pull request ')
 
-  if user_name
-    next unless log.author.name == user_name
+  if user_email
+    next unless log.author.email.force_encoding('UTF-8') == user_email
   end
 
   natto_mecab.parse(log.message.force_encoding('UTF-8')) do |n|
